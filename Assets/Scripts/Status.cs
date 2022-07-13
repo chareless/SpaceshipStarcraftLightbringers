@@ -1,36 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Status : MonoBehaviour
 {
     public int maxHealth;
-    public int health;
-    public int damage;
+    public static int health;
     public static int coins;
-    public float attackSpeed;
+    public static float attackSpeed;
     public static string type;
     public static bool isAlive;
     public static int score;
-    public static float gameSpeed;
-    public static float gameTime;
-    public static int gameLevel;
     public static bool takeKill;
     public static int totalKill;
-    GameObject[] healthBars;
-    GameObject bullet;
+    public GameObject[] healthBars;
+    public GameObject bullet;
+    public GameObject hero;
+    public GameObject[] bullets;
+    public GameObject[] heroes;
 
     public static int selectedHero;
     public static int selectedBullet;
+
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI coinText;
+
+    public Transform firePoint;
+
+    Rigidbody2D rb;
+
+    public GameObject gameOverCanvas;
     void Start()
     {
-        Application.targetFrameRate = 60;
+        rb=GetComponent<Rigidbody2D>();
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        InvokeRepeating("PointsTime", 0f, 0.015f);
         isAlive = true;
         coins = 0;
-        gameTime = 0;
-        gameLevel = 1;
-        gameSpeed = 10;
         totalKill = 0;
+        attackSpeed = 1.5f;
+        health = maxHealth;
+        StartControl();
+    }
+
+    void StartControl()
+    {
+        //selectedBullet = StartMenu.selectedBullet;
+        //selectedHero = StartMenu.selectedHero;
+        selectedBullet = 1;
+        selectedHero = 1;
+        bullet = bullets[selectedBullet-1];
+        hero = heroes[selectedHero-1];
+        for(int i = 0; i < heroes.Length; i++)
+        {
+            if(i+1 != selectedHero)
+            {
+                Destroy(heroes[i]);
+            }
+        }
+       
     }
 
     void HealthControl()
@@ -40,6 +69,7 @@ public class Status : MonoBehaviour
             health = 0;
             isAlive=false;
             //ölüm animasyonu
+            gameOverCanvas.SetActive(true);
         }
         else
         {
@@ -65,36 +95,29 @@ public class Status : MonoBehaviour
 
     void KillControl()
     {
-        if(takeKill==true)
+        if(takeKill==true && isAlive)
         {
-            ScorePoints(100);
+            ScorePoints(200);
             totalKill++;
             takeKill =false;
         }
     }
 
-    void TimeTicking()
-    {
-        gameTime += Time.deltaTime;
-    }
-
-    void LevelControl()
-    {
-        if(gameTime>100)
-        {
-            gameLevel++;
-            gameSpeed += 5;
-            gameTime = 0;
-        }
-    }
-
     void ScorePoints(int points)
     {
-        score += points*gameLevel;
-        if(score<=0)
+        score += points * (BottomSpawner.difLevel + 1);
+        if (score <= 0)
         {
-            score = 0;
+           score = 0;
         }
+    }
+    public void PointsTime()
+    {
+        if (isAlive)
+        {
+            score += (BottomSpawner.difLevel + 1);
+        }
+        scoreText.text = "Score : " + score.ToString();
     }
 
     void TakeDamage(int damage)
@@ -105,14 +128,15 @@ public class Status : MonoBehaviour
     void EarnCoin(int coin)
     {
         coins += coin;
+        coinText.text = " : " + coin.ToString();
     }
 
-    void Jump()
+    public void Jump()
     {
 
     }
 
-    void Shoot()
+    public void Shoot()
     {
 
     }
@@ -120,30 +144,32 @@ public class Status : MonoBehaviour
     void Update()
     {
         HealthControl();
-        TimeTicking();
-        LevelControl();
         KillControl();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag=="Enemy")
+        if (isAlive)
         {
-            TakeDamage(1);
-            ScorePoints(-50);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.tag=="Coin")
-        {
-            EarnCoin(1);
-            ScorePoints(1000);
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.tag=="EnemyFire")
-        {
-            TakeDamage(1);
-            ScorePoints(-20);
-            Destroy(collision.gameObject);
+            if (collision.gameObject.tag == "EnemyHead" || collision.gameObject.tag == "EnemyEye" || collision.gameObject.tag == "EnemySlime"
+            || collision.gameObject.tag == "EnemyWorm" || collision.gameObject.tag == "EnemyCannon")
+            {
+                TakeDamage(1);
+                ScorePoints(-500);
+                Destroy(collision.gameObject);
+            }
+            if (collision.gameObject.tag == "Coin")
+            {
+                EarnCoin(1);
+                ScorePoints(1000);
+                Destroy(collision.gameObject);
+            }
+            if (collision.gameObject.tag == "EnemyBullet")
+            {
+                TakeDamage(1);
+                ScorePoints(-20);
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

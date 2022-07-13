@@ -39,6 +39,7 @@ public class StartMenu : MonoBehaviour
     public Text versionText;
     public TextMeshProUGUI highscoreText;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI totalPlayText;
 
     public static string ownHeroes;
     public static string[] myHeroes= new string[6];
@@ -49,6 +50,7 @@ public class StartMenu : MonoBehaviour
     public static int totalPlay;
     public static int coin;
     public static int highscore;
+    public static int totalKill;
 
     public bool startClicked;
     public float timer;
@@ -86,10 +88,11 @@ public class StartMenu : MonoBehaviour
 
     void Start()
     {
-        timer = 0.1f;
+        timer = 1f;
         LoadValues();
         ObjectInitialize();
         highscoreText.text = "HIGHSCORE : " + highscore;
+        totalPlayText.text = "TOTAL PLAYED : " + totalPlay + "     TOTAL KILL : " + totalKill;
         coinText.text = "COIN : " + coin + " C";
         versionText.text = Application.version;
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
@@ -112,6 +115,10 @@ public class StartMenu : MonoBehaviour
         clickSound.PlayOneShot(cancel);
     }
 
+    public void StartGame()
+    {
+        startClicked = true;
+    }
     public void PlayGame()
     {
         MainCanvas.SetActive(false);
@@ -631,7 +638,7 @@ public class StartMenu : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("GameScene");
             }
         }
     }

@@ -15,7 +15,15 @@ public class Background : MonoBehaviour
         }
         else
         {
-            transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
+            if(BottomSpawner.spawnRate != 0)
+            {
+                transform.position -= new Vector3(speed * Time.deltaTime * (1 / BottomSpawner.spawnRate), 0, 0);
+            }
+            else
+            {
+                transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
+            }
+            
         }
     }
 }

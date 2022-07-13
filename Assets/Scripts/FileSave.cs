@@ -16,6 +16,7 @@ public class FileSave : MonoBehaviour
     public static int coin;
     public static int totalPlay;
     public static int highscore;
+    public static int totalKill;
 
 
     static void GetData()
@@ -25,6 +26,7 @@ public class FileSave : MonoBehaviour
         coin = StartMenu.coin;
         totalPlay = StartMenu.totalPlay;
         highscore = StartMenu.highscore;
+        highscore = StartMenu.totalKill;
     }
 
     public static void SaveData()
@@ -34,13 +36,14 @@ public class FileSave : MonoBehaviour
         PlayerPrefs.SetInt("Coin", coin);
         PlayerPrefs.SetInt("TotalPlay", totalPlay);
         PlayerPrefs.SetInt("Highscore", highscore);
+        PlayerPrefs.SetInt("TotalKill", totalKill);
         PlayerPrefs.Save();
     }
 
     public static void TotalData()
     {
         GetData();
-        fullData = ownHeroes + ":" + ownBullets + ":" + coin + ":" + totalPlay + ":" + highscore;
+        fullData = ownHeroes + ":" + ownBullets + ":" + coin + ":" + totalPlay + ":" + highscore + ":" + totalKill;
     }
 
     public static void SaveFile()
@@ -75,6 +78,7 @@ public class FileSave : MonoBehaviour
             StartMenu.coin = Convert.ToInt32(splitData[2]);
             StartMenu.totalPlay = Convert.ToInt32(splitData[3]);
             StartMenu.highscore = Convert.ToInt32(splitData[4]);
+            StartMenu.totalKill = Convert.ToInt32(splitData[5]);
             SaveData();
         }
     }
