@@ -27,13 +27,25 @@ public class Status : MonoBehaviour
     public TextMeshProUGUI coinText;
 
     public Transform firePoint;
+    public static float shootTimer;
+    public float bulletForce;
 
     Rigidbody2D rb;
+    AudioSource sourceAudio;
+    public AudioClip coin;
+    public AudioClip laser;
+    public AudioClip hit;
+    public AudioClip die;
 
     public GameObject gameOverCanvas;
+
+    public static float jump;
+    public static bool jumpable;
+    Vector3 velocity;
     void Start()
     {
-        rb=GetComponent<Rigidbody2D>();
+        sourceAudio = gameObject.GetComponent<AudioSource>();
+        rb =GetComponent<Rigidbody2D>();
         Application.targetFrameRate = Screen.currentResolution.refreshRate;
         InvokeRepeating("PointsTime", 0f, 0.015f);
         isAlive = true;
@@ -67,6 +79,7 @@ public class Status : MonoBehaviour
         if(health<=0)
         {
             health = 0;
+            sourceAudio.PlayOneShot(die);
             isAlive=false;
             //ölüm animasyonu
             gameOverCanvas.SetActive(true);
@@ -123,34 +136,63 @@ public class Status : MonoBehaviour
     void TakeDamage(int damage)
     {
         health -= damage;
+        sourceAudio.PlayOneShot(hit);
     }
 
     void EarnCoin(int coin)
     {
         coins += coin;
         coinText.text = " : " + coin.ToString();
+        sourceAudio.PlayOneShot(this.coin);
     }
 
     public void Jump()
     {
-
+        if (Mathf.Approximately(rb.velocity.y, 0) || jumpable == true )
+        {
+            jump = 13f;
+            rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
+            jump = 0f;
+        }
     }
 
     public void Shoot()
     {
-
+        if (shootTimer <= 0)
+        {
+            sourceAudio.PlayOneShot(laser);
+            GameObject bulletr = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+            Rigidbody2D rgbr = bulletr.GetComponent<Rigidbody2D>();
+            rgbr.AddForce(firePoint.transform.right * bulletForce, ForceMode2D.Impulse);
+            Destroy(bulletr, 1.5f);
+            shootTimer = attackSpeed;
+        }
     }
 
     void Update()
     {
         HealthControl();
         KillControl();
+        shootTimer -= Time.deltaTime;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            jumpable = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isAlive)
         {
+            if (collision.gameObject.tag == "Platform")
+            {
+                jumpable = true;
+            }
+
             if (collision.gameObject.tag == "EnemyHead" || collision.gameObject.tag == "EnemyEye" || collision.gameObject.tag == "EnemySlime"
             || collision.gameObject.tag == "EnemyWorm" || collision.gameObject.tag == "EnemyCannon")
             {

@@ -10,11 +10,13 @@ public class GameOver : MonoBehaviour
     public GameObject menuButton;
     public GameObject quitButton;
     public float timer;
+    public GameObject gameSound;
     public GameObject loseSound;
     public GameObject waveSpawner;
     public GameObject coinSpawner;
     void Start()
     {
+        Destroy(gameSound);
         waveSpawner.SetActive(false);
         coinSpawner.SetActive(false);
         loseSound.SetActive(true);

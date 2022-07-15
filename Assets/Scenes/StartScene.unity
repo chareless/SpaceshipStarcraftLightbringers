@@ -18945,7 +18945,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e7127dc33f613da45b1cf0d1ab577c0d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -25190,10 +25190,10 @@ MonoBehaviour:
   LoadingCanvas: {fileID: 1073697875}
   clickSound: {fileID: 2143876433}
   gameMusic: {fileID: 1577164747}
-  nextClip: {fileID: 0}
-  backClip: {fileID: 0}
-  purchase: {fileID: 0}
-  cancel: {fileID: 0}
+  nextClip: {fileID: 8300000, guid: 7082aa91476434073809693d3d5988a6, type: 3}
+  backClip: {fileID: 8300000, guid: 8e3af82deb48243c682a84a0ae603aa7, type: 3}
+  purchase: {fileID: 8300000, guid: 29df8e798230e44128d54040c4971b7f, type: 3}
+  cancel: {fileID: 8300000, guid: e8ccab16a5a3f43a1a981d899d8d171c, type: 3}
   mainSlider: {fileID: 749155130}
   musicSlider: {fileID: 60169589}
   mainVolumeText: {fileID: 96637486}

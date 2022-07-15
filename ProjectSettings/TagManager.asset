@@ -11,6 +11,8 @@ TagManager:
   - EnemyWarm
   - Coin
   - EnemyBullet
+  - Platform
+  - Bullet
   layers:
   - Default
   - TransparentFX

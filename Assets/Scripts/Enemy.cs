@@ -8,18 +8,19 @@ public class Enemy : MonoBehaviour
     public float aliveTime;
 
     public float Sayac;
-    public static float bulletForce = -30f;
+    public float bulletForce;
     public Transform firePoint;
     public GameObject bullet;
     public int randomShoot;
     public AudioClip laserSound;
     AudioSource sourceAudio;
+
+    public GameObject particle;
     void Start()
     {
-        speed = 5;
-        aliveTime = 10;
+        aliveTime = 5;
         randomShoot = Random.Range(0, 100);
-        Sayac = 1.5f;
+        Sayac = 3f;
         sourceAudio = gameObject.GetComponent<AudioSource>();
     }
 
@@ -36,9 +37,10 @@ public class Enemy : MonoBehaviour
     {
         if (Sayac <= 0)
         {
+            sourceAudio.PlayOneShot(laserSound);
             GameObject bulletr = Instantiate(bullet, firePoint.position, firePoint.rotation);
             Rigidbody2D rgbr = bulletr.GetComponent<Rigidbody2D>();
-            rgbr.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            rgbr.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
             sourceAudio.PlayOneShot(laserSound);
             Destroy(bulletr, 3f);
             Sayac = 3f;
@@ -138,8 +140,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
+            Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
             Destroy(gameObject);
             Status.takeKill = true;
+        }
+        if(collision.gameObject.tag == "Player")
+        {
+            Instantiate(particle, transform.position, Quaternion.identity);
         }
     }
 }
