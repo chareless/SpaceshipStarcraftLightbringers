@@ -374,6 +374,11 @@ public class StartMenu : MonoBehaviour
                 PlayPurchaseButtonSound();
                 ownHeroes += "h" + (index + 1);
                 coin -= heroPrices[index];
+                if (index == 4)
+                {
+                    ownBullets += "b11b12b13b14b15" ;
+                    PlayerPrefs.SetString("Bullets", ownBullets);
+                }
                 PlayerPrefs.SetInt("Coin", coin);
                 PlayerPrefs.SetString("Heroes", ownHeroes);
                 PlayerPrefs.Save();
