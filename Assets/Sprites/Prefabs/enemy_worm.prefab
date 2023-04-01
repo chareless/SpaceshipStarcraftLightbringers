@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1083929553770211280}
   - component: {fileID: 2848750396403070665}
   - component: {fileID: -4955787107197953454}
+  - component: {fileID: 6379520906112898134}
   m_Layer: 0
   m_Name: enemy_worm
   m_TagString: EnemyWarm
@@ -270,6 +271,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &6379520906112898134
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083929553770211287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8486845e46172f54ea78d1dc8fa1990a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7417182817945954222
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9171520106093363}
   - component: {fileID: 1731903868688598952}
   - component: {fileID: -3374656404596752842}
+  - component: {fileID: 4786047834428721432}
   m_Layer: 0
   m_Name: enemy_eye
   m_TagString: EnemyEye
@@ -243,6 +244,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &4786047834428721432
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9171520106093364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b906078a37d3fa34d91d0c64c1014323, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6506040297519345516
 GameObject:
   m_ObjectHideFlags: 0

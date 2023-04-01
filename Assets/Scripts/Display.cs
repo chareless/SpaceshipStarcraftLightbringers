@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FPSDisplay : MonoBehaviour
+public class Display : MonoBehaviour
 {
     public static int frame;
     public static float fpsTimer = 0f;
     public static float pollingTime = 1f;
     public Text fpsText;
-    void Start()
+
+    public AudioSource gameMusic;
+    public AudioSource loseMusic;
+
+    void MusicSound()
     {
-        
+        gameMusic.volume = PlayerPrefs.GetFloat("MusicValue");
+        loseMusic.volume = PlayerPrefs.GetFloat("MusicValue");
     }
 
-    // Update is called once per frame
-    void Update()
+    void ShowFPS()
     {
         fpsTimer += Time.deltaTime;
         frame++;
@@ -26,5 +30,11 @@ public class FPSDisplay : MonoBehaviour
             fpsTimer -= pollingTime;
             frame = 0;
         }
+    }
+
+    void Update()
+    {
+        ShowFPS();
+        MusicSound();
     }
 }

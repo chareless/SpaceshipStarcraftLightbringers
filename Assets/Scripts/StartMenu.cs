@@ -86,11 +86,18 @@ public class StartMenu : MonoBehaviour
     public Button[] selectHeroWindowsButton;
     public SpriteRenderer[] selectHeroSprites;
 
+    public GameObject specialShipShop;
+    public GameObject specialShipSelect;
+    public GameObject specialShipSelected;
+    public static float rotateCounter;
+
     void Start()
     {
         timer = 1f;
         LoadValues();
         ObjectInitialize();
+        selectedHero = 0;
+        selectedBullet = 0;
         highscoreText.text = "HIGHSCORE : " + highscore;
         totalPlayText.text = "TOTAL PLAYED : " + totalPlay + "     TOTAL KILL : " + totalKill;
         coinText.text = "COIN : " + coin + " C";
@@ -166,7 +173,7 @@ public class StartMenu : MonoBehaviour
     public void OpenStoreLink()
     {
         PlayNextButtonSound();
-        //Application.OpenURL("https://play.google.com/store/apps/details?id=com.saribayirdeniz.SpaceshipStarcraftLightbringers");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.saribayirdeniz.SpaceshipStarcraft2");
     }
 
     public void OpenShop()
@@ -409,7 +416,7 @@ public class StartMenu : MonoBehaviour
         {
             selectedHero = index + 1;
             selectedHeroSprite.sprite = heroes[index];
-            selectedHeroSprite.transform.localScale = new Vector3(20, 20, 0);
+            selectedHeroSprite.transform.localScale = new Vector3(10, 10, 0);
             SelectHeroCanvas.SetActive(false);
             SelectCanvas.SetActive(true);
             PlayNextButtonSound();
@@ -418,6 +425,10 @@ public class StartMenu : MonoBehaviour
 
     public void BackButton()
     {
+        mainSlider.value = volumeValue;
+        musicSlider.value = musicValue;
+        mainVolumeText.text = "Main Volume : " + (volumeValue * 100).ToString("F0");
+        musicVolumeText.text = "Music Volume : " + (musicValue * 100).ToString("F0");
         MainCanvas.SetActive(true);
         DefaultCanvas.SetActive(true);
         SelectCanvas.SetActive(false);
@@ -530,6 +541,17 @@ public class StartMenu : MonoBehaviour
             totalPlay = 0;
         }
     }
+    public void TotalKillControl()
+    {
+        if (PlayerPrefs.GetInt("TotalKill") > 0)
+        {
+            totalKill = PlayerPrefs.GetInt("TotalKill");
+        }
+        else
+        {
+            totalKill = 0;
+        }
+    }
     public void MoneyControl()
     {
         if (PlayerPrefs.GetInt("Coin") > 0)
@@ -610,6 +632,7 @@ public class StartMenu : MonoBehaviour
         MusicControl();
         ScoreControl();
         TotalPlayedControl();
+        TotalKillControl();
         MoneyControl();
         BulletControl();
         SkinControl();
@@ -647,10 +670,22 @@ public class StartMenu : MonoBehaviour
             }
         }
     }
+    
 
+    void RotateControl()
+    {
+        rotateCounter += Time.deltaTime * 100;
+        specialShipShop.transform.rotation = Quaternion.Euler(0, 0, -rotateCounter);
+        specialShipSelect.transform.rotation = Quaternion.Euler(0, 0, -rotateCounter);
+        if(selectedHero == 5)
+        {
+            specialShipSelected.transform.rotation = Quaternion.Euler(0, 0, -rotateCounter);
+        }
+    }
     void Update()
     {
         BackControl();
         StartControl();
+        RotateControl();
     }
 }

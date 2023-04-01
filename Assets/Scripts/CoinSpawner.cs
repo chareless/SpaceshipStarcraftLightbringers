@@ -7,16 +7,11 @@ public class CoinSpawner : MonoBehaviour
     public GameObject coin;
     public float timer;
     public bool create;
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (!create)
         {
-            int random = Random.Range(50, 100);
+            int random = Random.Range(25, 50);
             create = true;
             timer = random;
         }
@@ -32,6 +27,5 @@ public class CoinSpawner : MonoBehaviour
                 Instantiate(coin, transform.position + new Vector3(0,randomPlace,0), transform.rotation);
             }
         }
-        
     }
 }

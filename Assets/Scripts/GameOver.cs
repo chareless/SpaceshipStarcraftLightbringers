@@ -21,9 +21,14 @@ public class GameOver : MonoBehaviour
         coinSpawner.SetActive(false);
         loseSound.SetActive(true);
         timer = 2f;
+        if(Status.score>PlayerPrefs.GetInt("Highscore"))
+        {
+            PlayerPrefs.SetInt("Highscore",Status.score);
+        }
         PlayerPrefs.SetInt("TotalPlay", (PlayerPrefs.GetInt("TotalPlay") + 1));
         PlayerPrefs.SetInt("Coin", (PlayerPrefs.GetInt("Coin") + Status.coins));
         PlayerPrefs.SetInt("TotalKill", (PlayerPrefs.GetInt("TotalKill") + Status.totalKill));
+        PlayerPrefs.Save();
     }
 
     public void MenuButton()
@@ -47,6 +52,5 @@ public class GameOver : MonoBehaviour
             menuButton.SetActive(true);
             quitButton.SetActive(true);
         }
-       
     }
 }

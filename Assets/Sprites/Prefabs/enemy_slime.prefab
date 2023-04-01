@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8299858076888537866}
   - component: {fileID: -3437183525241581465}
   - component: {fileID: 1833446845026229505}
+  - component: {fileID: 5281768768936188411}
   m_Layer: 0
   m_Name: enemy_slime
   m_TagString: EnemySlime
@@ -243,6 +244,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &5281768768936188411
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8299858076888537867}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b9288247c3da214ca8c0206b43825c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8749155264990434385
 GameObject:
   m_ObjectHideFlags: 0

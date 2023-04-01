@@ -26,7 +26,7 @@ public class FileSave : MonoBehaviour
         coin = StartMenu.coin;
         totalPlay = StartMenu.totalPlay;
         highscore = StartMenu.highscore;
-        highscore = StartMenu.totalKill;
+        totalKill = StartMenu.totalKill;
     }
 
     public static void SaveData()

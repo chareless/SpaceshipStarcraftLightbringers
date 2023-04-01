@@ -36,12 +36,16 @@ public class Status : MonoBehaviour
     public AudioClip laser;
     public AudioClip hit;
     public AudioClip die;
+    public AudioClip kill;
 
     public GameObject gameOverCanvas;
 
     public static float jump;
     public static bool jumpable;
     Vector3 velocity;
+
+    public static float rotateCounter;
+    public GameObject shipSprite;
     void Start()
     {
         sourceAudio = gameObject.GetComponent<AudioSource>();
@@ -58,10 +62,16 @@ public class Status : MonoBehaviour
 
     void StartControl()
     {
-        //selectedBullet = StartMenu.selectedBullet;
-        //selectedHero = StartMenu.selectedHero;
-        selectedBullet = 1;
-        selectedHero = 1;
+        if(selectedBullet == 0 && selectedHero == 0)
+        {
+            selectedBullet = 1;
+            selectedHero = 1;
+        }
+        else
+        {
+            selectedBullet = StartMenu.selectedBullet;
+            selectedHero = StartMenu.selectedHero;
+        }
         bullet = bullets[selectedBullet-1];
         hero = heroes[selectedHero-1];
         for(int i = 0; i < heroes.Length; i++)
@@ -71,7 +81,6 @@ public class Status : MonoBehaviour
                 Destroy(heroes[i]);
             }
         }
-       
     }
 
     void HealthControl()
@@ -113,6 +122,7 @@ public class Status : MonoBehaviour
             ScorePoints(200);
             totalKill++;
             takeKill =false;
+            sourceAudio.PlayOneShot(kill);
         }
     }
 
@@ -169,10 +179,21 @@ public class Status : MonoBehaviour
         }
     }
 
+
+    public void RotateShip()
+    {
+        if (selectedHero == 5)
+        {
+            rotateCounter += Time.deltaTime  * 100;
+            shipSprite.transform.rotation = Quaternion.Euler(0, 0, -rotateCounter);
+        }
+    }
+
     void Update()
     {
         HealthControl();
         KillControl();
+        RotateShip();
         shootTimer -= Time.deltaTime;
     }
 
@@ -192,7 +213,6 @@ public class Status : MonoBehaviour
             {
                 jumpable = true;
             }
-
             if (collision.gameObject.tag == "EnemyHead" || collision.gameObject.tag == "EnemyEye" || collision.gameObject.tag == "EnemySlime"
             || collision.gameObject.tag == "EnemyWorm" || collision.gameObject.tag == "EnemyCannon")
             {
