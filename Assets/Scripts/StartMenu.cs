@@ -168,7 +168,7 @@ public class StartMenu : MonoBehaviour
     public void OpenWebSite()
     {
         PlayNextButtonSound();
-        Application.OpenURL("http://saribayirdeniz.cf/spaceshipstarcraft2.html");
+        Application.OpenURL("https://chareless.github.io/saribayirdeniz/spaceshipstarcraft2.html");
     }
     public void OpenStoreLink()
     {
