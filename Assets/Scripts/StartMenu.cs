@@ -102,7 +102,7 @@ public class StartMenu : MonoBehaviour
         totalPlayText.text = "TOTAL PLAYED : " + totalPlay + "     TOTAL KILL : " + totalKill;
         coinText.text = "COIN : " + coin + " C";
         versionText.text = Application.version;
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        Application.targetFrameRate = 120;
     }
 
     void PlayNextButtonSound()
@@ -512,6 +512,7 @@ public class StartMenu : MonoBehaviour
         else
         {
             musicValue = 1;
+            PlayerPrefs.SetFloat("MusicValue",musicValue);
             musicSlider.value = musicValue;
             gameMusic.volume = musicValue;
         }

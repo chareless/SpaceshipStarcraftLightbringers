@@ -50,7 +50,7 @@ public class Status : MonoBehaviour
     {
         sourceAudio = gameObject.GetComponent<AudioSource>();
         rb =GetComponent<Rigidbody2D>();
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        Application.targetFrameRate = 120;
         InvokeRepeating("PointsTime", 0f, 0.015f);
         isAlive = true;
         coins = 0;
@@ -90,7 +90,7 @@ public class Status : MonoBehaviour
             health = 0;
             sourceAudio.PlayOneShot(die);
             isAlive=false;
-            //ölüm animasyonu
+            //ï¿½lï¿½m animasyonu
             gameOverCanvas.SetActive(true);
         }
         else
@@ -158,7 +158,7 @@ public class Status : MonoBehaviour
 
     public void Jump()
     {
-        if (Mathf.Approximately(rb.velocity.y, 0) || jumpable == true )
+        if (Mathf.Approximately(rb.linearVelocity.y, 0) || jumpable == true )
         {
             jump = 13f;
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
