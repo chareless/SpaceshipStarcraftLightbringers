@@ -66,7 +66,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "swappywrapper::@7e25bd1f32ce224db4e9",
-					"jsonFile" : "target-swappywrapper-RelWithDebInfo-ce5df1d4fd8f8f4d3733.json",
+					"jsonFile" : "target-swappywrapper-RelWithDebInfo-cd457d577c9e0f253088.json",
 					"name" : "swappywrapper",
 					"projectIndex" : 1
 				}
@@ -76,7 +76,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/MyPrograms/Code/UnityGames/SS2/SpaceshipStarcraftLightbringers/.utmp/RelWithDebInfo/633x92n1/arm64-v8a",
+		"build" : "D:/MyPrograms/Code/UnityGames/SS2/SpaceshipStarcraftLightbringers/.utmp/RelWithDebInfo/633x92n1/armeabi-v7a",
 		"source" : "D:/MyPrograms/Code/UnityGames/SS2/SpaceshipStarcraftLightbringers/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 	},
 	"version" : 
